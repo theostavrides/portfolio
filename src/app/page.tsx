@@ -2,22 +2,41 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import ModelViewer from '@/components/ModelViewer'
 import { Card, CardList } from '@/components/Card/Card'
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.column}>
-        <section>
+      <section className={styles.description}>
           <h1 className={styles.title}>Theo Stavrides</h1>
-          <h3>Web Developer / Digital Artist / Musician </h3>
-        </section>
+        
+        <p>Hello! I'm Theo, a full-stack web developer based in Vancouver, BC.</p>
+        
+        <p>
+          I most recently worked for <a href='https://ceo.ca' target="_blank">CEO.CA</a>, a stock market and social media app.
+          Before that I worked at <a href='https://aidynamics.com/' target="_blank">AIDynamics</a>, creating tools for their end-to-end AI platform. 
+          I also worked for the shoe company <a href='https://casca.com/' target="_blank">Casca</a>, where I was their primary web developer for two years. 
+        </p>
 
-        <section>
-          <ModelViewer />
-        </section>
+        <p>I have recent experience using the following techologies:  </p>
+        
+        <ul className={styles.techList}>
+          <li>Javascript</li>
+          <li>Typescript</li>
+          <li>React</li>
+          <li>NextJS</li>
+          <li>Node + Express</li>
+          <li>PostgreSQL</li>
+          <li>MongoDB</li>
+          <li>C++</li>
+          <li>GLSL</li>
+        </ul>
+      </section>
+    </main>
+  )
+}
 
-        <hr />
-
+/* 
         <section>
           <h3>Clients</h3>
           
@@ -35,7 +54,10 @@ export default function Home() {
             </Card>
 
             <Card>
-              <Image className={styles.anvardaLogo} src="/images/anvarda_logo.png" alt="anvarda logo" width="200" height="50"/>
+              <div >
+                <Image style={{ backgroundColor: "#5e5e5e" }} className={styles.anvardaLogo} src="/images/anvarda_logo.png" alt="anvarda logo" width="200" height="50"/>
+
+              </div>
             </Card>
 
             <Card>
@@ -48,8 +70,4 @@ export default function Home() {
         <hr />
         <section>
           <h3>Projects</h3>
-        </section>
-      </div>
-    </main>
-  )
-}
+        </section> */
