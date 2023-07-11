@@ -1,8 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Dosis } from 'next/font/google'
+import { Karla, Arimo, Plus_Jakarta_Sans } from 'next/font/google'
 
-const mulish = Dosis({ subsets: ['latin'] })
+const mulish = Plus_Jakarta_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Theo Stavrides',

@@ -6,10 +6,40 @@
   min-height: 100vh;
 }
 
-.main section {
-  margin: 10px 0;
+.main p {
+  margin: 16px 0;
+}
+
+.main section, .main header {
+  margin: 40px 0;
+}
+
+.column {
   max-width: 500px;
 }
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: 40px;
+  cursor: default;
+  font-weight: 400;
+}
+  
+.selfie {
+  border-radius: 100%;
+}
+
 
 /* Description Section */
 
@@ -19,17 +49,7 @@
 }
 
 .description {
-  font-size: 18px;
-}
-
-.description p {
-  margin: 16px 0;
-}
-
-.title {
-  font-size: 45px;
-  cursor: default;
-  font-weight: 400;
+  letter-spacing: 1px;
 }
 
 .techList {

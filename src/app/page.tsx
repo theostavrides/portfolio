@@ -9,32 +9,41 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <section className={styles.description}>
-        <h1 className={styles.title}>Theo Stavrides</h1>
-        <p>Hello! I'm Theo, a full-stack web developer based in Vancouver, BC.</p>
-        
-        
-        <p>
-          I most recently worked for <a href='https://ceo.ca' target="_blank">CEO.CA</a>, a stock market and social media app.
-          Before that I worked at <a href='https://aidynamics.com/' target="_blank">AIDynamics</a>, creating tools for their end-to-end AI platform. 
-          I also spent two years as the main web developer of <a href='https://casca.com/' target="_blank">Casca</a>, a shoe company. 
-        </p>
+      <div className={styles.column}>
+        <header className={styles.header}>
+          <div className={styles.headerText}>
+            <h1 className={styles.title}>Theo Stavrides</h1>
+            <p>Full-stack web developer <br/>Based in Vancouver, BC.</p>
+          </div>
+          <Image src="/images/selfie.jpeg" alt="selfie" width="180" height="180" className={styles.selfie}/>
+        </header>
 
-        {/* <p>After graduating from UBC in 2013 and then teaching for 5 years, I completed the web development bootcamp at Lighthouse Labs and switched careers.</p> */}
+        <section className={styles.description}>
+          
+          <p>
+            I most recently worked for <a href='https://ceo.ca' target="_blank">CEO.CA</a>, a stock market and social media app.
+            Before that I worked at <a href='https://aidynamics.com/' target="_blank">AIDynamics</a>, creating tools for their end-to-end AI platform. 
+            I also spent two years as the main web developer of <a href='https://casca.com/' target="_blank">Casca</a>, a shoe company. 
+          </p>
 
-        <div className={styles.divider}>~</div>
+          {/* <p>After graduating from UBC in 2013 and then teaching for 5 years, I completed the web development bootcamp at Lighthouse Labs and switched careers.</p> */}
 
-        <p>Some of the techologies I have used recently include:  </p>
-        
-        <ul className={styles.techList}>
-          {techList.map((tech: string) => {
-            return <li key={tech}>{"◦ "}{tech}</li>
-          })}
-        </ul>
-        <p></p>
+          <div className={styles.divider}>~</div>
 
-        <div className={styles.divider}>~</div>
-      </section>
+          <p>Some of the techologies I have used recently include:  </p>
+          
+          <ul className={styles.techList}>
+            {techList.map((tech: string) => {
+              return <li key={tech}>{"◦ "}{tech}</li>
+            })}
+          </ul>
+          <p></p>
+
+          <div className={styles.divider}>~</div>
+        </section>
+
+      </div>
+      
     </main>
   )
 }
