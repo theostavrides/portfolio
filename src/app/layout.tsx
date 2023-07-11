@@ -1,8 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Mulish } from 'next/font/google'
+import { Dosis } from 'next/font/google'
 
-const mulish = Mulish({ subsets: ['latin'] })
+const mulish = Dosis({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Theo Stavrides',

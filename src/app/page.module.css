@@ -12,15 +12,30 @@
 }
 
 /* Description Section */
+
+.divider {
+  display: flex;
+  justify-content: center;
+}
+
+.description {
+  font-size: 18px;
+}
+
 .description p {
   margin: 16px 0;
 }
 
 .title {
-  font-size: 2.7rem;
+  font-size: 45px;
+  cursor: default;
+  font-weight: 400;
 }
 
-
+.techList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 
 
 

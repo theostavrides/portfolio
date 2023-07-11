@@ -5,32 +5,35 @@ import { Card, CardList } from '@/components/Card/Card'
 import Link from 'next/link'
 
 export default function Home() {
+  const techList = ["Javascript", "Typescript", "React", "NextJS", "Node + Express",  "PostgreSQL", "MongoDB", "C++", "GLSL"]
+
   return (
     <main className={styles.main}>
       <section className={styles.description}>
-          <h1 className={styles.title}>Theo Stavrides</h1>
-        
+        <h1 className={styles.title}>Theo Stavrides</h1>
         <p>Hello! I'm Theo, a full-stack web developer based in Vancouver, BC.</p>
+        
         
         <p>
           I most recently worked for <a href='https://ceo.ca' target="_blank">CEO.CA</a>, a stock market and social media app.
           Before that I worked at <a href='https://aidynamics.com/' target="_blank">AIDynamics</a>, creating tools for their end-to-end AI platform. 
-          I also worked for the shoe company <a href='https://casca.com/' target="_blank">Casca</a>, where I was their primary web developer for two years. 
+          I also spent two years as the main web developer of <a href='https://casca.com/' target="_blank">Casca</a>, a shoe company. 
         </p>
 
-        <p>I have recent experience using the following techologies:  </p>
+        {/* <p>After graduating from UBC in 2013 and then teaching for 5 years, I completed the web development bootcamp at Lighthouse Labs and switched careers.</p> */}
+
+        <div className={styles.divider}>~</div>
+
+        <p>Some of the techologies I have used recently include:  </p>
         
         <ul className={styles.techList}>
-          <li>Javascript</li>
-          <li>Typescript</li>
-          <li>React</li>
-          <li>NextJS</li>
-          <li>Node + Express</li>
-          <li>PostgreSQL</li>
-          <li>MongoDB</li>
-          <li>C++</li>
-          <li>GLSL</li>
+          {techList.map((tech: string) => {
+            return <li key={tech}>{"◦ "}{tech}</li>
+          })}
         </ul>
+        <p></p>
+
+        <div className={styles.divider}>~</div>
       </section>
     </main>
   )
