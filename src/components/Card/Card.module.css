@@ -1,0 +1,19 @@
+.cardList {
+    --card-list-gap: 16px;
+    --card-width: 400px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--card-list-gap);
+    max-width: calc(2 * var(--card-width) + var(--card-list-gap));
+}
+
+.card {
+    background-color: white;
+    border-radius: 12px;
+    width: var(--card-width);
+
+    -webkit-box-shadow: 4px 3px 8px 1px rgba(0,0,0,0.34); 
+    box-shadow: 4px 3px 8px 1px rgba(0,0,0,0.34);
+}

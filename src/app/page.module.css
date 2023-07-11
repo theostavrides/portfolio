@@ -21,19 +21,6 @@
   letter-spacing: 1.6px;
 }
 
-.clientList {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 10px 20px;
-  max-width: 650px;
-  flex-wrap: wrap;
-}
-
-.clientList li {
-  margin: 10px 0;
-}
-
 .ceoLogo {
   width: 250px;
   height: 50px;
