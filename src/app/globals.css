@@ -9,6 +9,8 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 220, 255, 255;
 
+  --primary-font-color: white;
+  --primary-link-color: #67ce6e;
   
 }
 
@@ -29,17 +31,19 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
+  /* background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb)
-  );
+  ); */
+  background-color: rgb(53, 77, 84);
+  color: white;
 }
 
 a {
-  color: #932c93;
+  color: var(--primary-link-color);
   text-decoration: none;
 }
 
