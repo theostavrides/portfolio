@@ -1,0 +1,10 @@
+.cvLink {
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    transform: translateX(-6px);
+    color: inherit;
+    font-size: 12px;
+}
+  

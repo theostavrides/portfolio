@@ -4,18 +4,24 @@ import * as THREE from 'three';
 import { useEffect } from 'react';
 
 const canvasParams = {
-    width: 100,
-    height: 100,
+    width: 300,
+    height: 300,
 }
 
-export default function ModelViewer () {
+interface IParams {
+    id: string;
+}
+
+export default function ModelViewer ({ id }: IParams) {
+    const canvasId = `${id}-canvas3d`
+
     useEffect(() => {
         const scene = new THREE.Scene()
 
         const camera = new THREE.PerspectiveCamera(50, 1, 1, 1000)
         camera.position.z = 35
 
-        const canvas = document.getElementById('canvas3d') as HTMLCanvasElement
+        const canvas = document.getElementById(canvasId) as HTMLCanvasElement
 
         // Set up renderer
         const renderer = new THREE.WebGLRenderer({
@@ -51,7 +57,7 @@ export default function ModelViewer () {
 
     return (
         <div>
-            <canvas id="canvas3d" width={canvasParams.width} height={canvasParams.height}/>
+            <canvas id={canvasId} width={canvasParams.width} height={canvasParams.height}/>
         </div>
     )
 }

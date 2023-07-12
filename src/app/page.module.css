@@ -9,10 +9,17 @@
   background-image: url("/images/subtle-prism.svg");
 }
 
-.column {}
+.main section {
+  width: 500px;
+}
+
+.row {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 70px;
+}
 
 .card {
-  max-width: 500px;
   background: #30454e;
   padding: 40px 24px;
   border-radius: 25px;
@@ -40,25 +47,6 @@
   line-height: 46px;
 }
 
-.description {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.cvLink {
-  width: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  transform: translateX(-6px);
-  color: inherit;
-  font-size: 12px;
-}
-
-.cvContainer img { display: flex; }
-
 .selfieWrapper {
   display: flex;
   align-items: center;
@@ -82,9 +70,18 @@
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+.profileCard footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 30px;
+}
 
-
-
+.modelViewerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 

@@ -1,0 +1,16 @@
+.button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: none;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #983bf7;
+    color: white;
+}
+
+.button span {
+    height: 24px;
+}

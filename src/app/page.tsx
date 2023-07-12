@@ -4,16 +4,17 @@ import ModelViewer from '@/components/ModelViewer'
 import { Card, CardList } from '@/components/Card/Card'
 import Link from 'next/link'
 import Divider from '@/components/Divider/Divider'
+import Button from '@/components/Button/Button'
+import CVButton from '@/components/CVButton/CVButton'
 
 export default function Home() {
   return (
     <main className={styles.main}>
       
-      {/* Column Left */}
-      <div className={styles.column}>
+      <div className={styles.row}>
         
         {/* Profile Card */}
-        <section className={styles.card}>
+        <section className={[styles.card, styles.profileCard].join(' ')}>
           <header className={styles.header}>
             <div>
               <h1 className={styles.title}>Theo Stavrides</h1>
@@ -42,29 +43,55 @@ export default function Home() {
                 return <li key={tech}>{"‣ "}{tech}</li>
               })}
             </ul>
-
-            <div style={{ marginTop: 30 }}>
-              <Link href="/cv" className={styles.cvLink}>
-                <Image src="/images/pdf-icons/1.png" alt="cv download" width="36" height="36"/>
-                cv
-              </Link>
-            </div>
           </div>
 
+          <footer >
+            <Button>Hire Me!</Button>
+            <div style={{width: 30}}></div>
+            <CVButton />
+          </footer>
+        </section>
+
+        {/* Model Viewer */}
+        <section className={styles.modelViewerContainer}>
+          <ModelViewer id="cube1"/>
         </section>
       </div>
 
-      <div className={styles.column}>
+      <div className={styles.row}>
+        {/* Model Viewer */}
+        <section className={styles.modelViewerContainer}>
+          <ModelViewer id="cube2"/>
+        </section>
+
         <section className={styles.card}>
           <h3>doooo</h3>
-          <p>fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef</p>
+          <p>
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+            
+          </p>
         </section>
       </div>
 
       {/* Projects Card */}
       
 
-      {/* <ModelViewer/> */}
       
     </main>
   )
