@@ -15,9 +15,10 @@ body {
 }
 
 body {
-  background-color: #354D54;
+  background-color: #30454e;
   color: #e3e2ed;
   font-weight: 200;
+  letter-spacing: 1px;
 }
 
 a {
