@@ -28,7 +28,7 @@ export default function Home() {
           <h3>Work Experience</h3>
           
           <p>
-            I most recently worked for <a href='https://ceo.ca' target="_blank">CEO.CA</a>, a stock market and social media app.
+            I am currently working as a front-end developer for <a href='https://ceo.ca' target="_blank">CEO.CA</a>, a stock market and social media app.
             Before that I worked at <a href='https://aidynamics.com/' target="_blank">AIDynamics</a>, creating tools for their end-to-end AI platform. 
             I also spent two years as the main web developer of <a href='https://casca.com/' target="_blank">Casca</a>, a shoe company. 
           </p>
@@ -36,7 +36,7 @@ export default function Home() {
           <p>Tech I've used recently includes:</p>
           <ul className={styles.techList}>
             {techList.map((tech: string) => {
-              return <li key={tech}>{"◦ "}{tech}</li>
+              return <li key={tech}>{"‣ "}{tech}</li>
             })}
           </ul>
 
