@@ -49,11 +49,11 @@ export default function Home() {
 
         </section>
 
-        <hr />
+        {/* <hr /> */}
           
-        <ModelViewer/>
+        {/* <ModelViewer/> */}
 
-        <Image src="/images/mask.png" alt="mask 3d render" width="600" height="600"/>
+        {/* <Image src="/images/mask.png" alt="mask 3d render" width="600" height="600"/> */}
 
         {/* <Divider /> */}
 

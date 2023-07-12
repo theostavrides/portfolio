@@ -6,9 +6,18 @@
   min-height: 100vh;
   position: relative;
 
-  /* background-image: url("/images/art-deco.webp"); */
+  background-image: url("/images/art-deco.webp");
+  /* width: 100vw */
 }
 
+.column {
+  background: #30454e;
+  padding: 20px;
+  border-radius: 25px;
+
+  -webkit-box-shadow: 4px 3px 8px 1px rgba(0,0,0,0.34); 
+  box-shadow: 4px 3px 8px 3px rgba(0,0,0,0.34);
+}
 .main p {
   margin: 16px 0;
 }
