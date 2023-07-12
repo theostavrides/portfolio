@@ -5,6 +5,8 @@
   padding: 1rem;
   min-height: 100vh;
   position: relative;
+
+  /* background-image: url("/images/art-deco.webp"); */
 }
 
 .main p {
@@ -29,6 +31,7 @@
   font-size: 40px;
   cursor: default;
   font-weight: 400;
+  line-height: 46px;
 }
 
 .description {
@@ -52,15 +55,19 @@
 
 .selfieWrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background-color: #6c6c6c;
   height: 180px;
   width: 180px;
+  padding: 10px;
   border-radius: 100%;
 }
 
 .selfie {
+  height: 170px;
+  width: 170px;
+  display: flex;
   border-radius: 100%;
 }
 

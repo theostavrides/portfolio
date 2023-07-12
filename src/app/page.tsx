@@ -22,6 +22,8 @@ export default function Home() {
           </div>
         </header>
 
+        <hr/>
+
         <section className={styles.workExperience}>
           <h3>Work Experience</h3>
           
@@ -47,6 +49,11 @@ export default function Home() {
 
         </section>
 
+        <hr />
+          
+        <ModelViewer/>
+
+        <Image src="/images/mask.png" alt="mask 3d render" width="600" height="600"/>
 
         {/* <Divider /> */}
 
