@@ -6,49 +6,63 @@ import Link from 'next/link'
 import Divider from '@/components/Divider/Divider'
 
 export default function Home() {
-  const techList = ["Javascript", "Typescript", "React", "NextJS", "Node + Express",  "PostgreSQL", "MongoDB", "Python", "GLSL"]
-
   return (
     <main className={styles.main}>
-      <div className={styles.card}>
-        <header className={styles.header}>
-          <div>
-            <h1 className={styles.title}>Theo Stavrides</h1>
-            <p>Web Developer + Designer <br/>Based in Vancouver, BC.</p>
-          </div>
+      
+      {/* Column Left */}
+      <div className={styles.column}>
+        
+        {/* Profile Card */}
+        <section className={styles.card}>
+          <header className={styles.header}>
+            <div>
+              <h1 className={styles.title}>Theo Stavrides</h1>
+              <p>Web Developer + Designer <br/>Based in Vancouver, BC.</p>
+            </div>
 
-          <div className={styles.selfieWrapper}>
-            <Image src="/images/selfie.jpeg" alt="selfie" width="170" height="170" className={styles.selfie}/>
-          </div>
-        </header>
+            <div className={styles.selfieWrapper}>
+              <Image src="/images/selfie.jpeg" alt="selfie" width="170" height="170" className={styles.selfie}/>
+            </div>
+          </header>
 
-        <hr className={styles.divider}/>
+          <hr className={styles.divider}/>
 
-        <section className={styles.workExperience}>
-          <h3>Work Experience</h3>
-          
-          <p>
-            I am currently working as a front-end developer for <a href='https://ceo.ca' target="_blank">CEO.CA</a>, a stock market and social media app.
-            Before that I worked at <a href='https://aidynamics.com/' target="_blank">AIDynamics</a>, creating tools for their end-to-end AI platform. 
-            I also spent two years as the main web developer of <a href='https://casca.com/' target="_blank">Casca</a>, a shoe company. 
-          </p>
-          
-          <p>Tech I've used recently includes:</p>
-          <ul className={styles.techList}>
-            {techList.map((tech: string) => {
-              return <li key={tech}>{"‣ "}{tech}</li>
-            })}
-          </ul>
+          <div className={styles.workExperience}>
+            <h3>Work Experience</h3>
+            
+            <p>
+              I am currently working as a front-end developer for <a href='https://ceo.ca' target="_blank">CEO.CA</a>, a stock market and social media app.
+              Before that I worked at <a href='https://aidynamics.com/' target="_blank">AIDynamics</a>, creating tools for their end-to-end AI platform. 
+              I also spent two years as the main web developer of <a href='https://casca.com/' target="_blank">Casca</a>, a shoe company. 
+            </p>
+            
+            <p>Tech I've used recently includes:</p>
+            <ul className={styles.techList}>
+              {["Javascript", "Typescript", "React", "NextJS", "Node", "Express",  "PostgreSQL", "MongoDB", "GLSL"].map((tech: string) => {
+                return <li key={tech}>{"‣ "}{tech}</li>
+              })}
+            </ul>
 
-          <div style={{marginTop: 30}}>
-            <Link href="/cv" className={styles.cvLink}>
-              <Image src="/images/pdf-icons/1.png" alt="cv download" width="36" height="36"/>
-              CV
-            </Link>
+            <div style={{ marginTop: 30 }}>
+              <Link href="/cv" className={styles.cvLink}>
+                <Image src="/images/pdf-icons/1.png" alt="cv download" width="36" height="36"/>
+                cv
+              </Link>
+            </div>
           </div>
 
         </section>
       </div>
+
+      <div className={styles.column}>
+        <section className={styles.card}>
+          <h3>doooo</h3>
+          <p>fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef</p>
+        </section>
+      </div>
+
+      {/* Projects Card */}
+      
 
       {/* <ModelViewer/> */}
       

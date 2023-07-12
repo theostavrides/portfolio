@@ -9,6 +9,8 @@
   background-image: url("/images/subtle-prism.svg");
 }
 
+.column {}
+
 .card {
   max-width: 500px;
   background: #30454e;
