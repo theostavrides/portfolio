@@ -1,8 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Karla, Arimo, Plus_Jakarta_Sans, Figtree } from 'next/font/google'
+import { Schibsted_Grotesk, M_PLUS_2, Rasa, Vazirmatn } from 'next/font/google'
 
-const mulish = Figtree({ subsets: ['latin'] })
+const mainFont = Vazirmatn({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Theo Stavrides',
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={mulish.className}>{children}</body>
+      <body className={mainFont.className}>{children}</body>
     </html>
   )
 }

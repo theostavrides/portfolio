@@ -3,6 +3,7 @@ import styles from './page.module.css'
 import ModelViewer from '@/components/ModelViewer'
 import { Card, CardList } from '@/components/Card/Card'
 import Link from 'next/link'
+import Divider from '@/components/Divider/Divider'
 
 export default function Home() {
   const techList = ["Javascript", "Typescript", "React", "NextJS", "Node + Express",  "PostgreSQL", "MongoDB", "C++", "GLSL"]
@@ -15,7 +16,10 @@ export default function Home() {
             <h1 className={styles.title}>Theo Stavrides</h1>
             <p>Full-stack web developer <br/>Based in Vancouver, BC.</p>
           </div>
-          <Image src="/images/selfie.jpeg" alt="selfie" width="180" height="180" className={styles.selfie}/>
+
+          <div className={styles.selfieWrapper}>
+            <Image src="/images/selfie.jpeg" alt="selfie" width="180" height="180" className={styles.selfie}/>
+          </div>
         </header>
 
         <section className={styles.description}>
@@ -28,18 +32,18 @@ export default function Home() {
 
           {/* <p>After graduating from UBC in 2013 and then teaching for 5 years, I completed the web development bootcamp at Lighthouse Labs and switched careers.</p> */}
 
-          <div className={styles.divider}>~</div>
+          <Divider />
 
-          <p>Some of the techologies I have used recently include:  </p>
+          {/* <p>Some of the techologies I have used recently include:  </p>
           
           <ul className={styles.techList}>
             {techList.map((tech: string) => {
               return <li key={tech}>{"◦ "}{tech}</li>
             })}
           </ul>
-          <p></p>
+          <p></p> */}
 
-          <div className={styles.divider}>~</div>
+          {/* <div className={styles.divider}>~</div> */}
         </section>
 
       </div>

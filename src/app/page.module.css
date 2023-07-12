@@ -4,6 +4,7 @@
   align-items: center;
   padding: 1rem;
   min-height: 100vh;
+  position: relative;
 }
 
 .main p {
@@ -35,18 +36,23 @@
   cursor: default;
   font-weight: 400;
 }
-  
+
+.selfieWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6c6c6c;
+  height: 190px;
+  width: 190px;
+  border-radius: 100%;
+}
+
 .selfie {
   border-radius: 100%;
 }
 
 
 /* Description Section */
-
-.divider {
-  display: flex;
-  justify-content: center;
-}
 
 .description {
   letter-spacing: 1px;
