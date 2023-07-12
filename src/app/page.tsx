@@ -10,11 +10,11 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <div className={styles.column}>
+      <div className={styles.card}>
         <header className={styles.header}>
           <div>
             <h1 className={styles.title}>Theo Stavrides</h1>
-            <p>Web Developer / Designer <br/>Based in Vancouver, BC.</p>
+            <p>Web Developer + Designer <br/>Based in Vancouver, BC.</p>
           </div>
 
           <div className={styles.selfieWrapper}>
@@ -22,7 +22,7 @@ export default function Home() {
           </div>
         </header>
 
-        <hr/>
+        <hr className={styles.divider}/>
 
         <section className={styles.workExperience}>
           <h3>Work Experience</h3>
@@ -48,17 +48,9 @@ export default function Home() {
           </div>
 
         </section>
-
-        {/* <hr /> */}
-          
-        {/* <ModelViewer/> */}
-
-        {/* <Image src="/images/mask.png" alt="mask 3d render" width="600" height="600"/> */}
-
-        {/* <Divider /> */}
-
-
       </div>
+
+      {/* <ModelViewer/> */}
       
     </main>
   )
