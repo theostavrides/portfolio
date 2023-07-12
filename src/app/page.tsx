@@ -14,7 +14,7 @@ export default function Home() {
         <header className={styles.header}>
           <div>
             <h1 className={styles.title}>Theo Stavrides</h1>
-            <p>Full-stack web developer <br/>Based in Vancouver, BC.</p>
+            <p>Web Developer / Designer <br/>Based in Vancouver, BC.</p>
           </div>
 
           <div className={styles.selfieWrapper}>

@@ -6,8 +6,7 @@
   min-height: 100vh;
   position: relative;
 
-  background-image: url("/images/art-deco.webp");
-  /* width: 100vw */
+  background-image: url("/images/subtle-prism.svg");
 }
 
 .column {
