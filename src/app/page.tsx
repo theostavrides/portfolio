@@ -47,7 +47,7 @@ export default function Home() {
 
           <footer >
             <Button>Hire Me!</Button>
-            <div style={{width: 30}}></div>
+            <div style={{width: 50}}></div>
             <CVButton />
           </footer>
         </section>

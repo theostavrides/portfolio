@@ -21,7 +21,7 @@
 
 .card {
   background: #30454e;
-  padding: 40px 24px;
+  padding: 45px 24px;
   border-radius: 25px;
 
   -webkit-box-shadow: 4px 3px 8px 1px rgba(0,0,0,0.34); 
@@ -72,9 +72,9 @@
 
 .profileCard footer {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: flex-start;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .modelViewerContainer {

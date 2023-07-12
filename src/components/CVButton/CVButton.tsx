@@ -5,8 +5,10 @@ import styles from './CVButton.module.css'
 export default function CVButton (){
     return (
         <Link href="/cv" className={styles.cvLink}>
-            <Image src="/images/pdf-icons/1.png" alt="cv download" width="45" height="45"/>
-            <span>CV</span>
+            <button>
+                <Image src="/images/pdf-icons/1.png" alt="cv download" width="45" height="45"/>
+                <span>CV</span>
+            </button>
         </Link>
     )
 }
