@@ -9,8 +9,13 @@
     justify-content: center;
     background-color: #983bf7;
     color: white;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #6f51d0;
 }
 
 .button span {
     height: 24px;
-}
+} 

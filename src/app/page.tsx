@@ -54,16 +54,12 @@ export default function Home() {
 
         {/* Model Viewer */}
         <section className={styles.modelViewerContainer}>
-          <ModelViewer id="cube1"/>
+          <ModelViewer id="chicken_mask"/>
         </section>
       </div>
 
       <div className={styles.row}>
-        {/* Model Viewer */}
-        <section className={styles.modelViewerContainer}>
-          <ModelViewer id="cube2"/>
-        </section>
-
+        <section>oo</section>
         <section className={styles.card}>
           <h3>doooo</h3>
           <p>
@@ -72,18 +68,8 @@ export default function Home() {
           fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
           fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
           fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
-          fwwefwef  fwwefweffwwefweffwwefweffwwefweffwwefw effwwefweffwwefweffwwefweffwwefweffwwefwef fwwefweffwwefwef
+ 
+
             
           </p>
         </section>
