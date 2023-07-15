@@ -1,11 +1,8 @@
 import Image from 'next/image'
 import styles from './page.module.css'
-import ModelViewer from '@/components/ModelViewer'
-import { Card, CardList } from '@/components/Card/Card'
-import Link from 'next/link'
-import Divider from '@/components/Divider/Divider'
 import Button from '@/components/Button/Button'
 import CVButton from '@/components/CVButton/CVButton'
+import SkiGameContainer from '@/components/SkiGameContainer/SkiGameContainer'
 
 export default function Home() {
   return (
@@ -52,9 +49,8 @@ export default function Home() {
           </footer>
         </section>
 
-        {/* Model Viewer */}
         <section className={styles.modelViewerContainer}>
-          <ModelViewer id="chicken_mask"/>
+          <SkiGameContainer />
         </section>
       </div>
 
