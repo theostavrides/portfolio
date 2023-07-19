@@ -2,7 +2,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import Button from '@/components/Button/Button'
 import CVButton from '@/components/CVButton/CVButton'
-import SkiGameContainer from '@/components/SkiGameContainer/SkiGameContainer'
+import CatapultCanvas from '@/components/CatapultCanvas/CatapultCanvas'
 
 export default function Home() {
   return (
@@ -50,7 +50,7 @@ export default function Home() {
         </section>
 
         <section className={styles.modelViewerContainer}>
-          <SkiGameContainer />
+          <CatapultCanvas />
         </section>
       </div>
 
