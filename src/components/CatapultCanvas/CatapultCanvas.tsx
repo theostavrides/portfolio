@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from 'react';
-import { initCatapult } from '@/components/Catapult/Catapult'; 
+import { initCatapult } from '@/games/Catapult/Catapult'; 
 import styles from './CatapultCanvas.module.css'
 
 const canvasParams = {

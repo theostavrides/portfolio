@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from 'react';
-import { initSkiGame } from '../SkiGame/SkiGame'
+import { initSkiGame } from '../../games/SkiGame/SkiGame'
 
 const canvasParams = {
     width: 500,

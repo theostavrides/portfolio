@@ -4,11 +4,11 @@ import {
     ArcRotateCamera,
     HemisphericLight,
     Vector3,
-    Mesh,
-    MeshBuilder,
     SceneLoader
-} from '@babylonjs/core';
-import "@babylonjs/loaders/glTF";
+} from '@babylonjs/core'
+
+import "@babylonjs/loaders/glTF"
+import "@babylonjs/inspector"
 
 
 export const initCatapult = async (canvas: HTMLCanvasElement) => {
@@ -16,7 +16,7 @@ export const initCatapult = async (canvas: HTMLCanvasElement) => {
     const scene = new Scene(engine);
 
     const initCamera = () => {
-        var camera: ArcRotateCamera = new ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, Vector3.Zero(), scene);
+        var camera: ArcRotateCamera = new ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new Vector3(0,3,6), scene);
         camera.attachControl(canvas, true);
         return camera
     }
@@ -43,10 +43,10 @@ export const initCatapult = async (canvas: HTMLCanvasElement) => {
         });
     }
     
-    
+     
     const importModels = async () => {
-        const result = await SceneLoader.AppendAsync( "models/", "catapult.glb", scene);
-        console.log(result)
+        const result = await SceneLoader.ImportMeshAsync(["Catapult"], "models/", "catapult.glb", scene);
+        console.log(scene.getNodeByName("Catapult"))
     }
     
     initDebugger()

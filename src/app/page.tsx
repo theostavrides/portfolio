@@ -1,10 +1,23 @@
+"use client"
+
 import Image from 'next/image'
 import styles from './page.module.css'
 import Button from '@/components/Button/Button'
 import CVButton from '@/components/CVButton/CVButton'
-import CatapultCanvas from '@/components/CatapultCanvas/CatapultCanvas'
+// import ModelViewer from '@/components/ModelViewer'
+import dynamic from 'next/dynamic'
+import { useState } from 'react'
+import ModelViewer from '@/components/ModelViewer'
+
+
+const DynamicCatapultCanvas = dynamic(() => import('@/components/CatapultCanvas/CatapultCanvas'), {
+  ssr: false,
+  loading: () => <p>loading</p>
+})
 
 export default function Home() {
+  const [showGame, setShowGame] = useState(false)
+
   return (
     <main className={styles.main}>
       
@@ -50,7 +63,10 @@ export default function Home() {
         </section>
 
         <section className={styles.modelViewerContainer}>
-          <CatapultCanvas />
+          {!showGame && <button onClick={() => setShowGame(true)}>Start Game</button>}
+          {showGame && <ModelViewer id="game"/>}
+          {/* <CatapultCanvas /> */}
+          {/* <ModelViewer id="wegwgwg"/> */}
         </section>
       </div>
 

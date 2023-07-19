@@ -1,14 +1,18 @@
 "use client"
 
 import { useEffect, useRef } from 'react';
-import CatapultCanvas from '@/components/CatapultCanvas/CatapultCanvas'
 import styles from './page.module.css'
+import dynamic from 'next/dynamic'
 
+const DynamicCatapultCanvas = dynamic(() => import('@/components/CatapultCanvas/CatapultCanvas'), {
+  ssr: false,
+  loading: () => <p>loading</p>
+})
   
 const Catapult = () => {
   return (
     <main className={styles.main}>
-      <CatapultCanvas />
+      <DynamicCatapultCanvas />
     </main>
   )
 }
