@@ -1,61 +1,87 @@
-import { 
-    Engine, 
-    Scene, 
-    ArcRotateCamera,
-    HemisphericLight,
-    Vector3,
-    SceneLoader
-} from '@babylonjs/core'
+import * as THREE from 'three'; 
+import { OrbitControls } from 'three/examples/jsm//controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-import "@babylonjs/loaders/glTF"
-import "@babylonjs/inspector"
+export default class CatapultGame {
+    public canvas: HTMLCanvasElement
+    public scene: THREE.Scene
+    public lights: { [key: string]: THREE.Light }
+    public camera: THREE.PerspectiveCamera
+    public renderer: THREE.WebGLRenderer
+    public controls: OrbitControls
+    public modelsLoaded: boolean
+    public models: { [key: string]: THREE.Object3D }
 
+    constructor(canvas: HTMLCanvasElement) {
+        this.canvas = canvas
+        this.scene = new THREE.Scene()
+        this.lights = this.initLights()
+        this.camera = this.initCamera()
+        this.renderer = this.initRenderer()
+        this.controls = new OrbitControls( this.camera, this.renderer.domElement );
+        this.modelsLoaded = false
+        this.models = {}
+        this.start()
 
-export const initCatapult = async (canvas: HTMLCanvasElement) => {
-    const engine = new Engine(canvas, true);
-    const scene = new Scene(engine);
+        this.animate = this.animate.bind(this)
+    }
 
-    const initCamera = () => {
-        var camera: ArcRotateCamera = new ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 2, new Vector3(0,3,6), scene);
-        camera.attachControl(canvas, true);
+    initLights() {
+        const ambientLight = new THREE.AmbientLight(0xffffff, .2)
+        this.scene.add(ambientLight)
+    
+        const pointLight1 = new THREE.PointLight( 0xffffff, 1, 10000 );
+        pointLight1.position.set( 140, 500, 120 );
+        pointLight1.castShadow = true
+        this.scene.add( pointLight1 );
+    
+        return { ambientLight, pointLight1 }
+    }
+
+    initCamera() {
+        const camera = new THREE.PerspectiveCamera(50, this.canvas.width / this.canvas.height, 1, 1000)
+        camera.rotateY(-.8)
+        camera.rotateX(-.3)
+        camera.position.z = 10
+        camera.position.y = 5
+        camera.position.x = -10
         return camera
     }
 
-    const initLights = () => {
-        const light1: HemisphericLight = new HemisphericLight("light1", new Vector3(1, 1, 0), scene);
-        return light1
+    initRenderer() {
+        const renderer = new THREE.WebGLRenderer({ canvas:this.canvas, antialias: true })
+        renderer.setClearColor( 0xdddddd, 1 );
+        renderer.setSize(this.canvas.width, this.canvas.height)
+        renderer.shadowMap.enabled = true
+    
+        return renderer
     }
 
-    const initEnvironment = () => {
-        // const sphere: Mesh = MeshBuilder.CreateSphere("sphere", { diameter: 1 }, scene);
-        // return sphere
-    }
+    async initModels () {
+        const loader = new GLTFLoader();
+        const modelData = await loader.loadAsync('models/catapult.glb')
+        const models: {[key: string]: THREE.Object3D} = {} 
     
-    const initDebugger = () => {
-        window.addEventListener("keydown", (ev) => {
-            if (ev.shiftKey && ev.key === 'I') {
-                if (scene.debugLayer.isVisible()) {
-                    scene.debugLayer.hide();
-                } else {
-                    scene.debugLayer.show();
-                }
-            }
-        });
-    }
+        modelData.scene.children.forEach(model => {
+            const modelName = model.userData.name as string
+            models[modelName] = model
+        })
     
-     
-    const importModels = async () => {
-        const result = await SceneLoader.ImportMeshAsync(["Catapult"], "models/", "catapult.glb", scene);
-        console.log(scene.getNodeByName("Catapult"))
+        return models
     }
-    
-    initDebugger()
-    initCamera()
-    initLights()
-    initEnvironment()
-    importModels()
 
-    engine.runRenderLoop(() => {
-        scene.render();
-    });
+    animate(){
+        window.requestAnimationFrame(this.animate)
+        this.controls.update();
+        this.renderer.render(this.scene, this.camera) 
+    }
+
+    async start() {
+        if (this.modelsLoaded === false) {
+            this.models = await this.initModels()
+        }
+
+        this.animate()
+    }
 }
+
