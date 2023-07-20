@@ -1,10 +1,14 @@
 import * as THREE from 'three'; 
+import * as CANNON from 'cannon-es'
 import { OrbitControls } from 'three/examples/jsm//controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Catapult } from './gameObjects/Catapult';
 
 interface IModels {
     Catapult: THREE.Object3D,
 }
+
+let lastFrameTime = 0
 
 export default class CatapultGame {
     public canvas: HTMLCanvasElement
@@ -14,6 +18,10 @@ export default class CatapultGame {
     public renderer: THREE.WebGLRenderer
     public controls: OrbitControls
     public models: { [key: string]: THREE.Object3D }
+    public world: CANNON.World
+    public clock: THREE.Clock
+    public sphere: THREE.Mesh|null
+    public sphereBody: CANNON.Body|null
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas
@@ -23,6 +31,11 @@ export default class CatapultGame {
         this.renderer = this.initRenderer()
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.models = {}
+        this.world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.82, 0) })
+        this.clock = new THREE.Clock()
+        this.sphere = null
+        this.sphereBody = null
+
         this.start()
 
         this.animate = this.animate.bind(this)
@@ -70,22 +83,59 @@ export default class CatapultGame {
         return models
     }
 
-    async initWorld (){
-        const clone1 = this.models.Catapult.clone(true)
-        this.scene.add(clone1)
+    async init (){
+        // const catapult = new Catapult({ game: this, position: new THREE.Vector3(0,0,0) })
+
+
+        const radius = .5 // m
+        this.sphereBody = new CANNON.Body({
+            mass: 100, // kg
+            shape: new CANNON.Sphere(radius),
+        })
+
+        this.sphereBody.position.set(0, 20, 0) // m
+        this.world.addBody(this.sphereBody)
+
+        const groundBody = new CANNON.Body({
+            type: CANNON.Body.STATIC,
+            shape: new CANNON.Plane(),
+        })
+        groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0) // make it face up
+        this.world.addBody(groundBody)
+
+
+        const geometry = new THREE.SphereGeometry(radius)
+        const material = new THREE.MeshNormalMaterial()
+        this.sphere = new THREE.Mesh(geometry, material)
+        this.scene.add(this.sphere)
     }
 
     animate(){
         window.requestAnimationFrame(this.animate)
-        this.controls.update();
+        
+        const delta = this.clock.getDelta()
+        
+        if (this.sphere && this.sphereBody) {
+            const {x,y,z} = this.sphereBody.position
+            this.sphere.position.copy(new THREE.Vector3(x,y,z))
+            console.log(x,y,z)
+
+            const { x: x0, y: y0, z: z0, w: w0 } = this.sphereBody.quaternion
+            this.sphere.quaternion.copy(new THREE.Quaternion(x0,y0,z0,w0))
+        }
+
+
+        this.controls.update()
+        this.world.fixedStep(delta)
         this.renderer.render(this.scene, this.camera) 
     }
 
     async start() {
         this.models = await this.initModels()
-        this.initWorld()
+        
+        this.init()
 
-        this.animate()
+        window.requestAnimationFrame(this.animate)
     }
 }
 
