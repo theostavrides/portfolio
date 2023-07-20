@@ -7,7 +7,7 @@ import styles from './page.module.css'
 
 import Button from '@/components/Button/Button'
 import CVButton from '@/components/CVButton/CVButton'
-import GameContainer from '@/games/catapult/GameContainer'
+import GameContainer from '@/components/GameContainer'
 
 export default function Home() {
   const [showGame, setShowGame] = useState(false)

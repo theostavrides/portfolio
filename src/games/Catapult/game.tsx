@@ -2,6 +2,10 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm//controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+interface IModels {
+    Catapult: THREE.Object3D,
+}
+
 export default class CatapultGame {
     public canvas: HTMLCanvasElement
     public scene: THREE.Scene
@@ -9,7 +13,6 @@ export default class CatapultGame {
     public camera: THREE.PerspectiveCamera
     public renderer: THREE.WebGLRenderer
     public controls: OrbitControls
-    public modelsLoaded: boolean
     public models: { [key: string]: THREE.Object3D }
 
     constructor(canvas: HTMLCanvasElement) {
@@ -19,7 +22,6 @@ export default class CatapultGame {
         this.camera = this.initCamera()
         this.renderer = this.initRenderer()
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
-        this.modelsLoaded = false
         this.models = {}
         this.start()
 
@@ -30,8 +32,8 @@ export default class CatapultGame {
         const ambientLight = new THREE.AmbientLight(0xffffff, .2)
         this.scene.add(ambientLight)
     
-        const pointLight1 = new THREE.PointLight( 0xffffff, 1, 10000 );
-        pointLight1.position.set( 140, 500, 120 );
+        const pointLight1 = new THREE.PointLight( 0xffffff, 1, 1000 );
+        pointLight1.position.set( 14, 50, 12 );
         pointLight1.castShadow = true
         this.scene.add( pointLight1 );
     
@@ -40,11 +42,9 @@ export default class CatapultGame {
 
     initCamera() {
         const camera = new THREE.PerspectiveCamera(50, this.canvas.width / this.canvas.height, 1, 1000)
-        camera.rotateY(-.8)
-        camera.rotateX(-.3)
-        camera.position.z = 10
+        camera.position.z = 15
         camera.position.y = 5
-        camera.position.x = -10
+        camera.position.x = 0
         return camera
     }
 
@@ -70,6 +70,11 @@ export default class CatapultGame {
         return models
     }
 
+    async initWorld (){
+        const clone1 = this.models.Catapult.clone(true)
+        this.scene.add(clone1)
+    }
+
     animate(){
         window.requestAnimationFrame(this.animate)
         this.controls.update();
@@ -77,9 +82,8 @@ export default class CatapultGame {
     }
 
     async start() {
-        if (this.modelsLoaded === false) {
-            this.models = await this.initModels()
-        }
+        this.models = await this.initModels()
+        this.initWorld()
 
         this.animate()
     }
