@@ -3,6 +3,8 @@ import * as CANNON from 'cannon-es'
 import { OrbitControls } from 'three/examples/jsm//controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Catapult } from './gameObjects/Catapult';
+import { StoneBlock } from './gameObjects/StoneBlock';
+import { GameObject } from './classes/GameObject';
 
 interface IModels {
     Catapult: THREE.Object3D,
@@ -20,8 +22,7 @@ export default class CatapultGame {
     public models: { [key: string]: THREE.Object3D }
     public world: CANNON.World
     public clock: THREE.Clock
-    public sphere: THREE.Mesh|null
-    public sphereBody: CANNON.Body|null
+    public gameObjects: GameObject[]
 
     constructor(canvas: HTMLCanvasElement) {
         this.canvas = canvas
@@ -33,8 +34,7 @@ export default class CatapultGame {
         this.models = {}
         this.world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.82, 0) })
         this.clock = new THREE.Clock()
-        this.sphere = null
-        this.sphereBody = null
+        this.gameObjects = []
 
         this.start()
 
@@ -79,7 +79,7 @@ export default class CatapultGame {
             const modelName = model.userData.name as string
             models[modelName] = model
         })
-    
+
         return models
     }
 
@@ -87,14 +87,15 @@ export default class CatapultGame {
         // const catapult = new Catapult({ game: this, position: new THREE.Vector3(0,0,0) })
 
 
-        const radius = .5 // m
-        this.sphereBody = new CANNON.Body({
-            mass: 100, // kg
-            shape: new CANNON.Sphere(radius),
-        })
+        const sb = new StoneBlock({ game: this, position: new THREE.Vector3(0,5,0) })
+        // const radius = .5 // m
+        // this.sphereBody = new CANNON.Body({
+        //     mass: 80, // kg
+        //     shape: new CANNON.Sphere(radius),
+        // })
 
-        this.sphereBody.position.set(0, 20, 0) // m
-        this.world.addBody(this.sphereBody)
+        // this.sphereBody.position.set(0, 10, 0) // m
+        // this.world.addBody(this.sphereBody)
 
         const groundBody = new CANNON.Body({
             type: CANNON.Body.STATIC,
@@ -104,10 +105,10 @@ export default class CatapultGame {
         this.world.addBody(groundBody)
 
 
-        const geometry = new THREE.SphereGeometry(radius)
-        const material = new THREE.MeshNormalMaterial()
-        this.sphere = new THREE.Mesh(geometry, material)
-        this.scene.add(this.sphere)
+        // const geometry = new THREE.SphereGeometry(radius)
+        // const material = new THREE.MeshNormalMaterial()
+        // this.sphere = new THREE.Mesh(geometry, material)
+        // this.scene.add(this.sphere)
     }
 
     animate(){
@@ -115,14 +116,7 @@ export default class CatapultGame {
         
         const delta = this.clock.getDelta()
         
-        if (this.sphere && this.sphereBody) {
-            const {x,y,z} = this.sphereBody.position
-            this.sphere.position.copy(new THREE.Vector3(x,y,z))
-            console.log(x,y,z)
-
-            const { x: x0, y: y0, z: z0, w: w0 } = this.sphereBody.quaternion
-            this.sphere.quaternion.copy(new THREE.Quaternion(x0,y0,z0,w0))
-        }
+        this.gameObjects.forEach(gomj => gomj.tick())
 
 
         this.controls.update()
