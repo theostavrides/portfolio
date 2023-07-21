@@ -1,5 +1,6 @@
 import * as THREE from 'three'; 
 import * as CANNON from 'cannon-es'
+import CannonDebugger from 'cannon-es-debugger'
 import { OrbitControls } from 'three/examples/jsm//controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Catapult } from './gameObjects/Catapult';
@@ -21,6 +22,7 @@ export default class CatapultGame {
     public controls: OrbitControls
     public models: { [key: string]: THREE.Object3D }
     public world: CANNON.World
+    public physicsDebugger: any
     public clock: THREE.Clock
     public gameObjects: GameObject[]
 
@@ -35,8 +37,9 @@ export default class CatapultGame {
         this.world = this.initPhysicsWorld()
         this.clock = new THREE.Clock()
         this.gameObjects = []
-
-
+        
+        
+        // this.physicsDebugger = this.initPhysicsDebugger()
         // const axesHelper = new THREE.AxesHelper( 5 );
         // this.scene.add( axesHelper );
         // const gridHelper = new THREE.GridHelper( 10, 10 );
@@ -79,6 +82,11 @@ export default class CatapultGame {
     initPhysicsWorld(){
         const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.82, 0) })
         return world
+    }
+
+    initPhysicsDebugger(){
+        const cannonDebugger = CannonDebugger(this.scene, this.world, {})
+        return cannonDebugger
     }
 
     async initModels () {
@@ -185,9 +193,16 @@ export default class CatapultGame {
         
         const delta = this.clock.getDelta()
         
+
         this.gameObjects.forEach(gomj => gomj.tick())
         this.controls.update()
         this.world.fixedStep(delta)
+
+        if (this.physicsDebugger?.update) {
+            this.physicsDebugger.update()
+        }
+
+
         this.renderer.render(this.scene, this.camera) 
     }
 
@@ -202,10 +217,9 @@ export default class CatapultGame {
         groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0) // make it face up
         this.world.addBody(groundBody)
 
-        this.initCastle({position: new THREE.Vector3(-4,0,3), dimensions: new THREE.Vector3(3,12,3)})
-        this.initCastle({position: new THREE.Vector3(-3,0,2), dimensions: new THREE.Vector3(2,13,2)})
-        this.initCastle({position: new THREE.Vector3(-2,0,1), dimensions: new THREE.Vector3(1,14,1)})
-
+        this.initCastle({position: new THREE.Vector3(-4,0,3), dimensions: new THREE.Vector3(3,15,3)})
+        this.initCastle({position: new THREE.Vector3(-3,0,2), dimensions: new THREE.Vector3(2,16,2)})
+        this.initCastle({position: new THREE.Vector3(-2,0,1), dimensions: new THREE.Vector3(1,17,1)})
 
         const initProjectile = () => {
             const position = new THREE.Vector3(2,3,80)

@@ -13,6 +13,7 @@
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
     "cannon-es": "^0.20.0",
+    "cannon-es-debugger": "^1.0.0",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.9",
     "next": "13.4.9",
