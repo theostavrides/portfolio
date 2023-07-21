@@ -68,7 +68,7 @@ export default class CatapultGame {
     }
 
     initRenderer() {
-        const renderer = new THREE.WebGLRenderer({ canvas:this.canvas, antialias: true })
+        const renderer = new THREE.WebGLRenderer({ canvas:this.canvas, antialias: false })
         renderer.setClearColor( 0xdddddd, 1 );
         renderer.setSize(this.canvas.width, this.canvas.height)
         renderer.shadowMap.enabled = true
@@ -95,13 +95,13 @@ export default class CatapultGame {
     }
 
     async initGameObjects (){
-        const lim = 9
+        const lim = 6
         for (let x = 0; x < lim; x++) {
             for (let y = 0; y < lim; y++) {
                 for (let z = 0; z < lim; z++) {
-                    const x0 = x * 3
+                    const x0 = x * 3 - 10
                     const y0 = y * 3 + 4
-                    const z0 = z * 3
+                    const z0 = z * 3 - 10
                     const sb = new StoneBlock({ game: this, position: new THREE.Vector3(x0, y0, z0) })
                     sb.body.applyTorque(new CANNON.Vec3(Math.random(),Math.random(), Math.random()))
                 }
