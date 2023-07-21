@@ -6,15 +6,17 @@ import { GameObject } from '../classes/GameObject'
 interface IConfig {
     game: CatapultGame
     position: THREE.Vector3
+    quaternion?: CANNON.Vec3
+    mass?: number
 }
 
 export class StoneBlock extends GameObject {
-    constructor({ game, position } : IConfig) {
+    constructor({ game, position, quaternion, mass } : IConfig) {
         const object3D = game.models.StoneBlock.clone(true)
         
         const body = new CANNON.Body({ 
-            mass: 3200, 
-            shape: new CANNON.Box(new CANNON.Vec3(1, .5, .5)) 
+            mass: mass||3200, 
+            shape: new CANNON.Box(new CANNON.Vec3(.99999, .49999, .49999))
         })
 
         // Super

@@ -37,10 +37,10 @@ export default class CatapultGame {
         this.gameObjects = []
 
 
-        const axesHelper = new THREE.AxesHelper( 5 );
-        this.scene.add( axesHelper );
-        const gridHelper = new THREE.GridHelper( 10, 10 );
-        this.scene.add( gridHelper );
+        // const axesHelper = new THREE.AxesHelper( 5 );
+        // this.scene.add( axesHelper );
+        // const gridHelper = new THREE.GridHelper( 10, 10 );
+        // this.scene.add( gridHelper );
 
         this.start()
 
@@ -61,14 +61,14 @@ export default class CatapultGame {
 
     initCamera() {
         const camera = new THREE.PerspectiveCamera(50, this.canvas.width / this.canvas.height, 1, 1000)
-        camera.position.z = 15
-        camera.position.y = 5
         camera.position.x = 0
+        camera.position.y = 20
+        camera.position.z = 40
         return camera
     }
 
     initRenderer() {
-        const renderer = new THREE.WebGLRenderer({ canvas:this.canvas, antialias: false })
+        const renderer = new THREE.WebGLRenderer({ canvas:this.canvas, antialias: true })
         renderer.setClearColor( 0xdddddd, 1 );
         renderer.setSize(this.canvas.width, this.canvas.height)
         renderer.shadowMap.enabled = true
@@ -94,33 +94,92 @@ export default class CatapultGame {
         return models
     }
 
-    async initGameObjects (){
-        const lim = 6
-        for (let x = 0; x < lim; x++) {
-            for (let y = 0; y < lim; y++) {
-                for (let z = 0; z < lim; z++) {
-                    const x0 = x * 3 - 10
-                    const y0 = y * 3 + 4
-                    const z0 = z * 3 - 10
-                    const sb = new StoneBlock({ game: this, position: new THREE.Vector3(x0, y0, z0) })
-                    sb.body.applyTorque(new CANNON.Vec3(Math.random(),Math.random(), Math.random()))
-                }
+    async initCastle ({position, dimensions} : { position: THREE.Vector3, dimensions: THREE.Vector3 }){
+        const length = dimensions.x
+        const height = dimensions.y
+        const width = dimensions.z
+
+        const blocks: StoneBlock[] = []
+
+        // Front Wall
+        for (let x = 0; x < length; x++) {
+            for (let y = 0; y < height; y++) {
+                const isOddLayer = y % 2 !== 0
+                const xOffset = isOddLayer ? 1 : 0 
+                const sb = new StoneBlock({ 
+                    game: this, 
+                    position: new THREE.Vector3(
+                        position.x + (x * 2) + xOffset, 
+                        position.y + y + .5, 
+                        position.z + 0
+                    ) })
+                sb.body.sleep()
+                blocks.push(sb)
+            }
+        }
+
+        // Back Wall
+        for (let x = 0; x < length; x++) {
+            for (let y = 0; y < height; y++) {
+                const isOddLayer = y % 2 !== 0
+                const xOffset = isOddLayer ? 0 : 1 
+                const sb = new StoneBlock({ 
+                    game: this, 
+                    position: new THREE.Vector3(
+                        position.x + (x * 2) + xOffset,
+                        position.y + y + .5, 
+                        position.z + (-width*2)
+                    ) 
+                })
+                sb.body.sleep()
+                blocks.push(sb)
+            }
+        }
+        
+
+        // Left Wall
+        for (let z = 0; z < width; z++) {
+            for (let y = 0; y < height; y++) {
+                const isOddLayer = y % 2 !== 0
+                const zOffset = isOddLayer ? 1 : 0 
+                const pos = new THREE.Vector3(
+                    position.x + - .5, 
+                    position.y + y + .5, 
+                    position.z - 1.5 - (z*2) + zOffset
+                )
+                const sb = new StoneBlock({ game: this, position: pos })
+                sb.body.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0), Math.PI/2)
+                sb.body.sleep()
+                blocks.push(sb)
+
+            }
+        }
+
+        // Rright Wall
+        for (let z = 0; z < width; z++) {
+            for (let y = 0; y < height; y++) {
+                const isOddLayer = y % 2 !== 0
+                const zOffset = isOddLayer ? 0 : 1 
+                const pos = new THREE.Vector3(
+                    position.x + -.5 + (length*2), 
+                    position.y + y + .5 , 
+                    position.z - 1.5 - (z*2) + zOffset
+                )
+                const sb = new StoneBlock({ game: this, position: pos })
+                sb.body.quaternion.setFromAxisAngle(new CANNON.Vec3(0,1,0), Math.PI/2)
+                sb.body.sleep()
+                blocks.push(sb)
+
             }
         }
 
 
-
-        const groundBody = new CANNON.Body({
-            type: CANNON.Body.STATIC,
-            shape: new CANNON.Plane(),
-        })
-        groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0) // make it face up
-        this.world.addBody(groundBody)
-
-
+        setTimeout(() => {
+            blocks.forEach(b => b.body.wakeUp())
+        }, 1000)
 
     }
-
+    
     animate(){
         window.requestAnimationFrame(this.animate)
         
@@ -135,7 +194,37 @@ export default class CatapultGame {
     async start() {
         this.models = await this.initModels()
 
-        this.initGameObjects()
+        const groundBody = new CANNON.Body({
+            type: CANNON.Body.STATIC,
+            shape: new CANNON.Plane(),
+        })
+
+        groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0) // make it face up
+        this.world.addBody(groundBody)
+
+        this.initCastle({position: new THREE.Vector3(-4,0,3), dimensions: new THREE.Vector3(3,12,3)})
+        this.initCastle({position: new THREE.Vector3(-3,0,2), dimensions: new THREE.Vector3(2,13,2)})
+        this.initCastle({position: new THREE.Vector3(-2,0,1), dimensions: new THREE.Vector3(1,14,1)})
+
+
+        const initProjectile = () => {
+            const position = new THREE.Vector3(2,3,80)
+            const sb = new StoneBlock({ game: this, position, mass: 3200 })
+            const vx = (Math.random() - 0.5) * 2 - 4
+            const vy = 6 + ((Math.random() - 0.5) * 5)
+            const vz = -70 + ((Math.random() - 0.5) * 4)
+    
+            setTimeout(() => {
+                sb.body.velocity.set(vx, vy, vz)
+            }, 100)
+        }
+
+        setTimeout(() => {
+            setInterval(() => {
+                initProjectile()
+            }, 1500)
+        }, 2000)
+
 
         window.requestAnimationFrame(this.animate)
     }
