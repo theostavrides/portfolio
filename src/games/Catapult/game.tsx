@@ -32,9 +32,15 @@ export default class CatapultGame {
         this.renderer = this.initRenderer()
         this.controls = new OrbitControls( this.camera, this.renderer.domElement );
         this.models = {}
-        this.world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.82, 0) })
+        this.world = this.initPhysicsWorld()
         this.clock = new THREE.Clock()
         this.gameObjects = []
+
+
+        const axesHelper = new THREE.AxesHelper( 5 );
+        this.scene.add( axesHelper );
+        const gridHelper = new THREE.GridHelper( 10, 10 );
+        this.scene.add( gridHelper );
 
         this.start()
 
@@ -70,6 +76,11 @@ export default class CatapultGame {
         return renderer
     }
 
+    initPhysicsWorld(){
+        const world = new CANNON.World({ gravity: new CANNON.Vec3(0, -9.82, 0) })
+        return world
+    }
+
     async initModels () {
         const loader = new GLTFLoader();
         const modelData = await loader.loadAsync('models/catapult.glb')
@@ -83,19 +94,21 @@ export default class CatapultGame {
         return models
     }
 
-    async init (){
-        // const catapult = new Catapult({ game: this, position: new THREE.Vector3(0,0,0) })
+    async initGameObjects (){
+        const lim = 9
+        for (let x = 0; x < lim; x++) {
+            for (let y = 0; y < lim; y++) {
+                for (let z = 0; z < lim; z++) {
+                    const x0 = x * 3
+                    const y0 = y * 3 + 4
+                    const z0 = z * 3
+                    const sb = new StoneBlock({ game: this, position: new THREE.Vector3(x0, y0, z0) })
+                    sb.body.applyTorque(new CANNON.Vec3(Math.random(),Math.random(), Math.random()))
+                }
+            }
+        }
 
 
-        const sb = new StoneBlock({ game: this, position: new THREE.Vector3(0,5,0) })
-        // const radius = .5 // m
-        // this.sphereBody = new CANNON.Body({
-        //     mass: 80, // kg
-        //     shape: new CANNON.Sphere(radius),
-        // })
-
-        // this.sphereBody.position.set(0, 10, 0) // m
-        // this.world.addBody(this.sphereBody)
 
         const groundBody = new CANNON.Body({
             type: CANNON.Body.STATIC,
@@ -105,10 +118,7 @@ export default class CatapultGame {
         this.world.addBody(groundBody)
 
 
-        // const geometry = new THREE.SphereGeometry(radius)
-        // const material = new THREE.MeshNormalMaterial()
-        // this.sphere = new THREE.Mesh(geometry, material)
-        // this.scene.add(this.sphere)
+
     }
 
     animate(){
@@ -117,8 +127,6 @@ export default class CatapultGame {
         const delta = this.clock.getDelta()
         
         this.gameObjects.forEach(gomj => gomj.tick())
-
-
         this.controls.update()
         this.world.fixedStep(delta)
         this.renderer.render(this.scene, this.camera) 
@@ -126,8 +134,8 @@ export default class CatapultGame {
 
     async start() {
         this.models = await this.initModels()
-        
-        this.init()
+
+        this.initGameObjects()
 
         window.requestAnimationFrame(this.animate)
     }
