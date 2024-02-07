@@ -2,12 +2,11 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import dynamic from 'next/dynamic'
 import styles from './page.module.css'
 
 import Button from '@/components/Button/Button'
 import CVButton from '@/components/CVButton/CVButton'
-import GameContainer from '@/components/GameContainer'
+import CatapultLink from '@/components/CatapultLink/CatapultLink'
 
 export default function Home() {
   const [showGame, setShowGame] = useState(false)
@@ -18,7 +17,7 @@ export default function Home() {
       <div className={styles.row}>
         
         {/* Profile Card */}
-        <section className={[styles.card, styles.profileCard].join(' ')}>
+        <section className={[styles.card, styles.cardPadding, styles.profileCard].join(' ')}>
           <header className={styles.header}>
             <div>
               <h1 className={styles.title}>Theo Stavrides</h1>
@@ -56,14 +55,13 @@ export default function Home() {
           </footer>
         </section>
 
-        <section className={styles.modelViewerContainer}>
-          {/* {!showGame && <button onClick={() => setShowGame(true)}>Start Game</button>} */}
-          <GameContainer />
+        <section className={[styles.card].join(' ')}>
+          <CatapultLink/>
         </section>
       </div>
 
       <div className={styles.row}>
-        <section>oo</section>
+        {/* <section>oo</section>
         <section className={styles.card}>
           <h3>doooo</h3>
           <p>
@@ -76,7 +74,7 @@ export default function Home() {
 
             
           </p>
-        </section>
+        </section> */}
       </div>
 
       {/* Projects Card */}

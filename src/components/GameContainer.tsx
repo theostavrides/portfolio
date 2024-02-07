@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useRef } from 'react';
-import CatapultGame from '../games/catapult/game'
-import { constants } from '../games/catapult/constants'
+import CatapultGame from '../games/3jsexample/game'
+import { constants } from '../games/3jsexample/constants'
 
 export default function GameContainer () {
     const canvasRef = useRef<HTMLCanvasElement|null>(null)
